@@ -1,0 +1,64 @@
+/* 페이지 배경 */
+body {
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Segoe UI", system-ui, Arial, sans-serif;
+  background:
+    radial-gradient(circle at 20% 10%, rgba(255,255,255,0.08) 0 12%, transparent 13%) 0 0/80px 80px,
+    linear-gradient(135deg, #0f2027, #203a43 60%, #2c5364);
+}
+
+/* 캔버스 카드 스타일 */
+canvas {
+  border: 2px solid rgba(255,255,255,0.15);
+  border-radius: 16px;
+  display: block;
+  margin: 24px auto;
+  background: linear-gradient(180deg, #233242, #1a2633); /* JS 비활성 시의 폴백 */
+  box-shadow:
+    0 12px 32px rgba(0,0,0,0.35),
+    inset 0 0 40px rgba(255,255,255,0.05);
+}
+
+#scoreDisplay {
+  /* 상단 중앙 고정 배지 */
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+  pointer-events: none; /* 캔버스 클릭을 가리지 않음 */
+
+  padding: 8px 18px;
+  border-radius: 999px;
+  color: #f7f9fc;
+  font-size: 18px;
+  font-weight: 700;
+  background: rgba(0,0,0,0.45);
+  border: 1px solid rgba(255,255,255,0.18);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.28), inset 0 0 24px rgba(255,255,255,0.06);
+  text-shadow: 0 2px 6px rgba(0,0,0,0.4);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+.controls{
+  margin: 10px 0 0;
+  display: flex;
+  justify-content: center;
+}
+.btn-restart{
+  padding: 10px 16px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.22);
+  background: linear-gradient(180deg, #6dd5fa, #2980b9);
+  color: #06202e;
+  font-weight: 800;
+  letter-spacing: .3px;
+  cursor: pointer;
+  box-shadow: 0 10px 24px rgba(0,0,0,.28), inset 0 0 16px rgba(255,255,255,.22);
+  transition: transform .12s ease, filter .15s ease;
+}
+.btn-restart:hover{ transform: translateY(-1px); filter: brightness(1.05); }
+.btn-restart:active{ transform: translateY(0); filter: brightness(.98); }
+

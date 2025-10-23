@@ -1,0 +1,64 @@
+const canvas = document.getElementById("gameCanvas");
+const ctx = canvas.getContext("2d");
+const scoreSpan = document.getElementById("score");
+
+let circle = {
+    x : Math.random() * 300 + 25,
+    y : 0,
+    r : 30,
+    speed : 2,
+    color : getrandomColor()
+};
+
+let score = 0;
+
+// 랜덤
+function getrandomColor() {
+    const colors = ['red', 'blue', 'green', 'yellow', '9ED6C0', 'orange', 'E2E7E4'];
+    return colors[Math.floor(Math.random() * colors.length)];
+}
+
+// 원 리셋 함수 생성
+function resetCircle() {
+    circle.x = Math.random() * (canvas.width - 50) + 25;
+    circle.y = 0;
+    circle.color = getrandomColor(); // 랜덤 색 할당
+}
+
+function drawCircle() {
+    ctx.beginPath();
+    ctx.arc(circle.x, circle.y, circle.r, 0, Math.PI * 2);
+    ctx.fillStyle = circle.color;
+    ctx.fill();
+    ctx.closePath();
+}
+
+function updateGame() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawCircle();
+    circle.y += circle.speed;
+
+    if (circle.y - circle.r > canvas.height) {
+        resetCircle();
+    }
+
+    requestAnimationFrame(updateGame);
+}
+
+canvas.addEventListener("click", function(e) {
+    const rect = canvas.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const mouseY = e.clientY - rect.top;
+
+    const dx = mouseX - circle.x;
+    const dy = mouseY - circle.y;
+    const distance = Math.sqrt(dx * dx + dy * dy);
+
+    if (distance < circle.r) {
+        score++;
+        scoreSpan.textContent = score;
+        resetCircle();
+    }
+});
+
+updateGame();
